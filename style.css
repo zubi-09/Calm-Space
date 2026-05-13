@@ -1,0 +1,130 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body */
+body {
+  font-family: 'Poppins', 'Roboto', sans-serif;
+  background: linear-gradient(135deg, #f3e7ff, #d9e4ff);
+  color: #4b0082;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Typography */
+h1, h2, h3 {
+  text-align: center;
+  color: #6a0572;
+  margin-top: 20px;
+}
+
+/* Navbar */
+.navbar {
+  position: fixed; /* makes it stick to the top */
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+  background-color: white;
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.navbar h1,
+.logo {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #3a0ca3;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #3a0ca3;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: #4a90e2;
+}
+
+/* Containers */
+.container {
+  padding: 40px 20px;
+  max-width: 1000px;
+  margin: auto;
+  text-align: center;
+}
+
+/* Buttons */
+button, .btn {
+  background: linear-gradient(45deg, #a4508b, #5f0a87);
+  color: white;
+  padding: 13px 26px;
+  border: none;
+  border-radius: 25px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s;
+  margin: 10px;
+}
+
+button:hover, .btn:hover {
+  background: linear-gradient(45deg, #aa6cc7, #cd89b9);
+}
+
+/* Forms */
+input, textarea {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 2px solid #c084fc;
+  border-radius: 10px;
+  font-size: 1rem;
+  background-color: #ffffffcc;
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 2rem;
+  background-color: #ffffff;
+  color: #777;
+  font-size: 0.9rem;
+  margin-top: 4rem;
+  border-top: 1px solid #eee;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .nav-links {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  .container h1 {
+    font-size: 2rem;
+  }
+
+  .container p {
+    font-size: 1rem;
+  }
+
+  .btn {
+    padding: 0.6rem 1.2rem;
+  }
+}

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Choose Your Mood</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #d4fc79, #96e6a1);
+      padding: 20px;
+      color: #333;
+      text-align: center;
+    }
+
+    .mood-button {
+      font-size: 1.5rem;
+      margin: 10px;
+      padding: 10px 20px;
+      border-radius: 10px;
+      cursor: pointer;
+      background-color: #3a0ca3;
+      color: white;
+      border: none;
+    }
+
+    .mood-button:hover {
+      background-color: #5f0fa3;
+    }
+
+    .save-btn {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #3a0ca3;
+      color: white;
+      border-radius: 10px;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>Select Your Mood</h1>
+
+  <div>
+    <button class="mood-button" onclick="setMood('😊')">Happy</button>
+    <button class="mood-button" onclick="setMood('😞')">Sad</button>
+    <button class="mood-button" onclick="setMood('😌')">Relaxed</button>
+    <button class="mood-button" onclick="setMood('😤')">Stressed</button>
+  </div>
+
+  <button class="save-btn" onclick="saveMood()">Save Mood</button>
+
+  <script>
+    let selectedMood = "";
+
+    // Function to set the mood
+    function setMood(mood) {
+      selectedMood = mood;
+    }
+
+    // Function to save the selected mood to localStorage
+    function saveMood() {
+      if (selectedMood) {
+        localStorage.setItem("userMood", selectedMood);
+        alert("Mood saved! Now go to your dashboard.");
+        window.location.href = "dashboard.html";  // Redirect to dashboard page
+      } else {
+        alert("Please select a mood.");
+      }
+    }
+  </script>
+</body>
+</html>

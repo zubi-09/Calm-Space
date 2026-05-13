@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mindfulness & Yoga</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #ef94f4, #8c9efa, #d187cb);
+      color: #4b0082;
+    }
+
+    .container {
+      padding: 40px 20px;
+      max-width: 1000px;
+      margin: auto;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2.8rem;
+      margin-bottom: 20px;
+      background: linear-gradient(45deg, #a4508b, #5f0a87);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .pose-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+
+    .pose-card {
+      background: rgba(255, 255, 255, 0.6);
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+    }
+
+    .pose-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .pose-card img {
+      width: 100px;
+      height: 100px;
+      margin-bottom: 15px;
+    }
+
+    .pose-name {
+      font-weight: bold;
+      font-size: 1.2rem;
+      color: #6a0572;
+    }
+
+    .pose-desc {
+      font-size: 0.95rem;
+      color: #333;
+      margin-top: 10px;
+    }
+
+    .breathe-box {
+      margin: 60px auto;
+      width: 180px;
+      height: 180px;
+      background-color: #dfb8ff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: breathe 6s infinite ease-in-out;
+      color: white;
+      font-size: 1.1rem;
+      font-weight: bold;
+      box-shadow: 0 0 20px #c084fc;
+    }
+
+    @keyframes breathe {
+      0% { 
+        transform: scale(1);
+      }
+      50% { 
+        transform: scale(1.3);
+      }
+      100% { 
+        transform: scale(1);
+      }
+    }
+    .btn {
+  background: linear-gradient(45deg, #a4508b, #5f0a87);
+  color: white;
+  padding: 13px 26px;
+  border: none;
+  border-radius: 25px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.btn:hover {
+  background: linear-gradient(45deg, #aa6cc7, #cd89b9);
+}
+
+.chatbot-icon {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      width: 60px;
+      height: 60px;
+      background-color: #9370db;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+      z-index: 999;
+    }
+
+    .chatbot-icon img {
+      width: 30px;
+      height: 30px;
+    }
+
+    .chatbot-window {
+      display: none;
+      position: fixed;
+      bottom: 100px;
+      right: 30px;
+      width: 300px;
+      height: 400px;
+      background-color: white;
+      border-radius: 15px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+      padding: 15px;
+      z-index: 998;
+    }
+
+    .chatbot-window.show {
+      display: block;
+    }
+
+    .chatbot-window h3 {
+      margin-top: 0;
+      font-size: 1.2rem;
+      color: #6a0dad;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Mindfulness & Yoga</h1>
+
+    <div class="breathe-box" id="breatheText">Breathe In...</div>
+
+    <div class="pose-grid">
+      <div class="pose-card">
+        <img src="https://cdn-icons-png.flaticon.com/512/2907/2907483.png" alt="Pose 1" />
+        <div class="pose-name">Mountain Pose</div>
+        <div class="pose-desc">Stand tall, relax your shoulders and breathe deeply.</div>
+      </div>
+
+      <div class="pose-card">
+        <img src="https://cdn-icons-png.flaticon.com/512/4322/4322991.png" alt="Pose 2" />
+        <div class="pose-name">Seated Meditation</div>
+        <div class="pose-desc">Sit comfortably, close your eyes and focus on your breath.</div>
+      </div>
+
+      <div class="pose-card">
+        <img src="https://cdn-icons-png.flaticon.com/512/3094/3094950.png" alt="Pose 3" />
+        <div class="pose-name">Child's Pose</div>
+        <div class="pose-desc">Kneel, rest your arms forward and let your back relax.</div>
+      </div>
+
+      <div class="pose-card">
+        <img src="https://cdn-icons-png.flaticon.com/512/4322/4322990.png" alt="Pose 4" />
+        <div class="pose-name">Tree Pose</div>
+        <div class="pose-desc">Balance on one foot, place the other on your thigh, hands up.</div>
+      </div>
+    </div>
+  </div>
+  <!-- Floating Chatbot Icon -->
+  <div class="chatbot-icon" onclick="toggleChatbot()">
+    <img src="https://cdn-icons-png.flaticon.com/512/4712/4712027.png" alt="Chatbot">
+  </div>
+
+  <!-- Chatbot Window -->
+  <div class="chatbot-window" id="chatbotWindow">
+    <h3>How can I help?</h3>
+    <p>(Chatbot content coming soon...)</p>
+  </div>
+ <!-- Proceed Button -->
+ <div style="text-align: center; margin-top: 40px;">
+  <a href="resources.html" style="
+    background: linear-gradient(135deg, #c084fc, #a78bfa);
+    color: white;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 25px;
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    transition: transform 0.2s ease;
+  " onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+    Proceed →
+  </a>
+</div>
+
+<script>
+  function toggleChatbot() {
+    const chatbot = document.getElementById('chatbotWindow');
+    chatbot.classList.toggle('show');
+  }
+
+  // Breathing text animation
+  const breatheText = document.getElementById('breatheText');
+  setInterval(() => {
+    breatheText.textContent = breatheText.textContent === 'Breathe In...' ? 'Breathe Out...' : 'Breathe In...';
+  }, 3000); // Change text every 3 seconds to match the breathing animation
+</script>
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Select Your Mood</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #ef94f4, #8c9efa, #d187cb);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .mood-box {
+      background-color: rgb(252, 252, 252);
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      max-width: 800px;
+      width: 90%;
+    }
+
+    .mood-box h1 {
+      font-size: 2rem;
+      color: #6a0dad;
+      margin-bottom: 20px;
+    }
+
+    .mood-buttons {
+      display: flex;
+      justify-content: space-evenly;
+      flex-wrap: wrap;
+      margin: 20px 0;
+    }
+
+    .mood-option {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 120px;
+    }
+
+    .mood-buttons button {
+      font-size: 2.5rem;
+      padding: 15px 25px;
+      border: none;
+      background-color: transparent;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    .mood-text {
+      font-size: 0.9rem;
+      color: #666;
+      margin-top: 8px;
+      text-align: center;
+    }
+
+    .mood-buttons button:hover {
+      transform: scale(1.3);
+    }
+  </style>
+</head>
+<body>
+  <div class="navbar">
+    <h1>CalmSpace</h1>
+    <div class="nav-links">
+      <a href="mood.html">Mood</a>
+      <a href="journal.html">Journal</a>
+      <a href="resources.html">Resources</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="#" onclick="logout()">Logout</a>
+    </div>
+  </div>
+  <div class="mood-box">
+    <h1>Select Your Mood</h1>
+    <div class="mood-buttons">
+      <div class="mood-option">
+        <button onclick="selectMood('😊')">😊</button>
+        <div class="mood-text">Feeling good today</div>
+      </div>
+      <div class="mood-option">
+        <button onclick="selectMood('😔')">😔</button>
+        <div class="mood-text">A bit low right now</div>
+      </div>
+      <div class="mood-option">
+        <button onclick="selectMood('😠')">😠</button>
+        <div class="mood-text">Kinda irritated</div>
+      </div>
+      <div class="mood-option">
+        <button onclick="selectMood('😢')">😢</button>
+        <div class="mood-text">Feeling down</div>
+      </div>
+      <div class="mood-option">
+        <button onclick="selectMood('😎')">😎</button>
+        <div class="mood-text">Feeling confident</div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/auth.js"></script>
+  <script>
+    requireAuth();
+
+    async function selectMood(mood) {
+      try {
+        const response = await authenticatedFetch('http://localhost:5000/api/mood', {
+          method: 'POST',
+          body: JSON.stringify({ mood })
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to save mood');
+        }
+
+        localStorage.setItem("selectedMood", mood);
+        window.location.href = "self-assessment.html";
+      } catch (error) {
+        console.error('Error saving mood:', error);
+        alert('Failed to save mood. Please try again.');
+      }
+    }
+  </script>
+</body>
+</html>
+

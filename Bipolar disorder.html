@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bipolar Disorder - CalmSpace</title>
+  <style>
+    /* Same CSS as Anxiety */
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #ef94f4, #8c9efa, #d187cb);
+      color: #4b0082;
+    }
+    nav {
+      background: white;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      padding: 0 30px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    nav .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #3498db;
+    }
+    .container {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 30px 40px;
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+    h2 {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 40px;
+      background: linear-gradient(45deg, #a4508b, #5f0a87);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .content-wrapper {
+      display: flex;
+      gap: 30px;
+      align-items: flex-start;
+    }
+    .images-column {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .images-column img {
+      width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+      object-fit: cover;
+      max-height: 140px;
+    }
+    .text-column {
+      flex: 2;
+      text-align: left;
+      color: #4b0082;
+    }
+    h3 {
+      margin-top: 30px;
+      color: #5f0a87;
+    }
+    ul {
+      padding-left: 20px;
+    }
+    a {
+      color: #4b0082;
+      text-decoration: none;
+    }
+    a:hover {
+      color: #a4508b;
+      text-decoration: underline;
+    }
+    .blog-link {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+    img.blog-img {
+      width: 60px;
+      height: 40px;
+      margin-right: 12px;
+      border-radius: 6px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+      object-fit: cover;
+    }
+    button {
+      display: block;
+      margin: 40px auto 0;
+      padding: 12px 24px;
+      font-size: 1rem;
+      background: linear-gradient(45deg, #a4508b, #5f0a87);
+      color: white;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      background: linear-gradient(45deg, #aa6cc7, #cd89b9);
+    }
+    @media (max-width: 700px) {
+      .content-wrapper {
+        flex-direction: column;
+      }
+      .images-column, .text-column {
+        width: 100%;
+      }
+      .images-column img {
+        max-height: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="logo">CalmSpace</div>
+  </nav>
+
+  <div class="container">
+    <h2>⚡ Understanding Bipolar Disorder</h2>
+
+    <div class="content-wrapper">
+      <div class="images-column">
+        <img src="https://images.unsplash.com/photo-1526256262350-7da7584cf5eb?auto=format&fit=crop&w=600&q=80" alt="Mood swings" />
+        <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=600&q=80" alt="Therapy" />
+        <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=600&q=80" alt="Bipolar" />
+      </div>
+
+      <div class="text-column">
+        <p>
+          Bipolar disorder causes extreme mood swings including emotional highs (mania) and lows (depression). It’s a lifelong condition but manageable with treatment.
+        </p>
+
+        <h3>Common Symptoms</h3>
+        <ul>
+          <li>Periods of high energy and impulsivity</li>
+          <li>Episodes of deep sadness or hopelessness</li>
+          <li>Difficulty concentrating</li>
+          <li>Changes in sleep patterns</li>
+        </ul>
+
+        <h3>Common Triggers</h3>
+        <ul>
+          <li>Stressful life events</li>
+          <li>Sleep disruption</li>
+          <li>Substance abuse</li>
+        </ul>
+
+        <h3>Related Blogs</h3>
+        <div class="blog-link">
+          <img src="https://images.unsplash.com/photo-1526256262350-7da7584cf5eb?auto=format&fit=crop&w=600&q=80" alt="Mood swings" class="blog-img" />
+          <a href="https://www.healthline.com/health/bipolar-disorder" target="_blank" rel="noopener">Bipolar Disorder Basics</a>
+        </div>
+        <div class="blog-link">
+          <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=600&q=80" alt="Therapy" class="blog-img" />
+          <a href="https://themighty.com/topic/bipolar-disorder/" target="_blank" rel="noopener">Personal Stories on Bipolar</a>
+        </div>
+        <div class="blog-link">
+          <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=600&q=80" alt="Bipolar" class="blog-img" />
+          <a href="https://www.nami.org/About-Mental-Illness/Mental-Health-Conditions/Bipolar-Disorder" target="_blank" rel="noopener">Managing Bipolar Disorder</a>
+        </div>
+
+        <h3>When to Seek Help</h3>
+        <p>If mood swings interfere with your life, talk to a mental health professional about diagnosis and treatment options.</p>
+
+        <button onclick="window.history.back()">← Back to Topics</button>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

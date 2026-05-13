@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Breathing - CalmSpace</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: #1a1a1a;
+            color: white;
+        }
+
+        .breathing-circle {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            position: relative;
+            margin: 20px;
+            transition: transform 4s ease-in-out, background-color 4s ease-in-out;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 0 50px rgba(255,255,255,0.2);
+        }
+
+        .instruction {
+            font-size: 2rem;
+            margin: 20px;
+            text-align: center;
+            opacity: 0.9;
+        }
+
+        .controls {
+            margin-top: 30px;
+            display: flex;
+            gap: 20px;
+        }
+
+        button {
+            padding: 12px 24px;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .color-picker {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .color-option {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .color-option:hover {
+            transform: scale(1.1);
+        }
+
+        .home-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            padding: 10px 20px;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .home-btn:hover {
+            background: rgba(255,255,255,0.2);
+        }
+    </style>
+</head>
+<body>
+    <a href="grounding-games.html" class="home-btn">← Back to Games</a>
+    
+    <div class="instruction" id="instruction">Click the circle to begin</div>
+    
+    <div class="breathing-circle" id="circle">
+        <span id="circleText">Start</span>
+    </div>
+
+    <div class="controls">
+        <button onclick="toggleBreathing()">Start/Stop</button>
+        <button onclick="changeSpeed()">Change Speed</button>
+    </div>
+
+    <div class="color-picker">
+        <div class="color-option" style="background: #ff6b6b" onclick="setColor('#ff6b6b')"></div>
+        <div class="color-option" style="background: #4ecdc4" onclick="setColor('#4ecdc4')"></div>
+        <div class="color-option" style="background: #95e1d3" onclick="setColor('#95e1d3')"></div>
+        <div class="color-option" style="background: #a8e6cf" onclick="setColor('#a8e6cf')"></div>
+        <div class="color-option" style="background: #dcedc1" onclick="setColor('#dcedc1')"></div>
+    </div>
+
+    <script>
+        const circle = document.getElementById('circle');
+        const instruction = document.getElementById('instruction');
+        const circleText = document.getElementById('circleText');
+        
+        let isBreathing = false;
+        let currentColor = '#4ecdc4';
+        let breathingSpeed = 4000; // 4 seconds
+        let breathingInterval;
+
+        function setColor(color) {
+            currentColor = color;
+            if (!isBreathing) {
+                circle.style.backgroundColor = color;
+            }
+        }
+
+        function changeSpeed() {
+            if (breathingSpeed === 4000) {
+                breathingSpeed = 6000;
+            } else if (breathingSpeed === 6000) {
+                breathingSpeed = 8000;
+            } else {
+                breathingSpeed = 4000;
+            }
+            
+            if (isBreathing) {
+                stopBreathing();
+                startBreathing();
+            }
+        }
+
+        function breatheIn() {
+            circle.style.transform = 'scale(1.5)';
+            circle.style.backgroundColor = currentColor;
+            instruction.textContent = 'Breathe In...';
+            circleText.textContent = 'In';
+        }
+
+        function breatheOut() {
+            circle.style.transform = 'scale(1)';
+            circle.style.backgroundColor = '#1a1a1a';
+            instruction.textContent = 'Breathe Out...';
+            circleText.textContent = 'Out';
+        }
+
+        function startBreathing() {
+            isBreathing = true;
+            breatheIn();
+            breathingInterval = setInterval(() => {
+                if (circle.style.transform === 'scale(1)') {
+                    breatheIn();
+                } else {
+                    breatheOut();
+                }
+            }, breathingSpeed);
+        }
+
+        function stopBreathing() {
+            isBreathing = false;
+            clearInterval(breathingInterval);
+            circle.style.transform = 'scale(1)';
+            circle.style.backgroundColor = currentColor;
+            instruction.textContent = 'Click the circle to begin';
+            circleText.textContent = 'Start';
+        }
+
+        function toggleBreathing() {
+            if (isBreathing) {
+                stopBreathing();
+            } else {
+                startBreathing();
+            }
+        }
+
+        circle.addEventListener('click', toggleBreathing);
+
+        // Set initial color
+        setColor(currentColor);
+    </script>
+</body>
+</html> 

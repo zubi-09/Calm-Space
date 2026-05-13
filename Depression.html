@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Depression - CalmSpace</title>
+  <style>
+    /* Same CSS as Anxiety */
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #ef94f4, #8c9efa, #d187cb);
+      color: #4b0082;
+    }
+    nav {
+      background: white;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      padding: 0 30px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    nav .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #3498db;
+    }
+    .container {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 30px 40px;
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+    h2 {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 40px;
+      background: linear-gradient(45deg, #a4508b, #5f0a87);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .content-wrapper {
+      display: flex;
+      gap: 30px;
+      align-items: flex-start;
+    }
+    .images-column {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .images-column img {
+      width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+      object-fit: cover;
+      max-height: 140px;
+    }
+    .text-column {
+      flex: 2;
+      text-align: left;
+      color: #4b0082;
+    }
+    h3 {
+      margin-top: 30px;
+      color: #5f0a87;
+    }
+    ul {
+      padding-left: 20px;
+    }
+    a {
+      color: #4b0082;
+      text-decoration: none;
+    }
+    a:hover {
+      color: #a4508b;
+      text-decoration: underline;
+    }
+    .blog-link {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+    img.blog-img {
+      width: 60px;
+      height: 40px;
+      margin-right: 12px;
+      border-radius: 6px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+      object-fit: cover;
+    }
+    button {
+      display: block;
+      margin: 40px auto 0;
+      padding: 12px 24px;
+      font-size: 1rem;
+      background: linear-gradient(45deg, #a4508b, #5f0a87);
+      color: white;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      background: linear-gradient(45deg, #aa6cc7, #cd89b9);
+    }
+    @media (max-width: 700px) {
+      .content-wrapper {
+        flex-direction: column;
+      }
+      .images-column, .text-column {
+        width: 100%;
+      }
+      .images-column img {
+        max-height: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="logo">CalmSpace</div>
+  </nav>
+
+  <div class="container">
+    <h2>🌧️ Understanding Depression</h2>
+
+    <div class="content-wrapper">
+      <div class="images-column">
+        <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=600&q=80" alt="Depression" />
+        <img src="https://images.unsplash.com/photo-1549924231-f129b911e442?auto=format&fit=crop&w=600&q=80" alt="Sadness" />
+        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=600&q=80" alt="Support" />
+      </div>
+
+      <div class="text-column">
+        <p>
+          Depression is more than feeling sad; it’s a persistent condition affecting mood, thoughts, and daily activities. It can make even small tasks feel overwhelming.
+        </p>
+
+        <h3>Common Symptoms</h3>
+        <ul>
+          <li>Persistent sadness or emptiness</li>
+          <li>Loss of interest in hobbies</li>
+          <li>Fatigue or lack of energy</li>
+          <li>Changes in sleep or appetite</li>
+        </ul>
+
+        <h3>Common Triggers</h3>
+        <ul>
+          <li>Trauma or loss</li>
+          <li>Chronic stress</li>
+          <li>Isolation or loneliness</li>
+        </ul>
+
+        <h3>Related Blogs</h3>
+        <div class="blog-link">
+          <img src="https://images.unsplash.com/photo-1549924231-f129b911e442?auto=format&fit=crop&w=600&q=80" alt="Sadness" class="blog-img" />
+          <a href="https://www.healthline.com/health/depression" target="_blank" rel="noopener">Depression Symptoms & Treatment</a>
+        </div>
+        <div class="blog-link">
+          <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=600&q=80" alt="Support" class="blog-img" />
+          <a href="https://themighty.com/topic/depression/" target="_blank" rel="noopener">Personal Stories on Depression</a>
+        </div>
+        <div class="blog-link">
+          <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=600&q=80" alt="Depression" class="blog-img" />
+          <a href="https://www.nimh.nih.gov/health/topics/depression" target="_blank" rel="noopener">National Institute on Mental Health</a>
+        </div>
+
+        <h3>When to Seek Help</h3>
+        <p>If depression affects your daily life or causes you distress, reach out to a counselor or healthcare provider.</p>
+
+        <button onclick="window.history.back()">← Back to Topics</button>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

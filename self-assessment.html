@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mental Health Self-Assessment - CalmSpace</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #ef94f4, #8c9efa, #d187cb);
+            color: #4b0082;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .assessment-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            background: linear-gradient(45deg, #a4508b, #5f0a87);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .question {
+            margin-bottom: 25px;
+            padding: 15px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        .question h3 {
+            margin-top: 0;
+            color: #6a0572;
+        }
+
+        .options {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .option-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            background: #e9d5ff;
+            color: #4b0082;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .option-btn:hover {
+            background: #d8b4fe;
+            transform: translateY(-2px);
+        }
+
+        .option-btn.selected {
+            background: #9333ea;
+            color: white;
+        }
+
+        .result-section {
+            display: none;
+            margin-top: 30px;
+            padding: 20px;
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        .topic-suggestion {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 10px;
+            background: #f3e8ff;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .topic-suggestion:hover {
+            transform: translateY(-3px);
+        }
+
+        .submit-btn {
+            display: block;
+            width: 200px;
+            margin: 30px auto;
+            padding: 15px;
+            border: none;
+            border-radius: 25px;
+            background: linear-gradient(45deg, #a4508b, #5f0a87);
+            color: white;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: #e9d5ff;
+            border-radius: 5px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .progress {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(45deg, #a4508b, #5f0a87);
+            transition: width 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="assessment-card">
+            <h1>Mental Health Self-Assessment</h1>
+            
+            <div id="selectedMood" style="
+                text-align: center;
+                font-size: 2.5rem;
+                margin: 20px 0;
+                padding: 15px;
+                background: rgba(255, 255, 255, 0.5);
+                border-radius: 15px;
+            "></div>
+
+            <div class="progress-bar">
+                <div class="progress" id="progressBar"></div>
+            </div>
+            
+            <div id="questionnaire">
+                <div class="question" data-question="1">
+                    <h3>How have you been feeling lately?</h3>
+                    <div class="options">
+                        <button class="option-btn" onclick="selectOption(1, 'mood')">Mostly sad or down</button>
+                        <button class="option-btn" onclick="selectOption(1, 'anxiety')">Worried or anxious</button>
+                        <button class="option-btn" onclick="selectOption(1, 'stress')">Overwhelmed or stressed</button>
+                        <button class="option-btn" onclick="selectOption(1, 'general')">Just want to improve wellbeing</button>
+                    </div>
+                </div>
+
+                <div class="question" data-question="2" style="display: none;">
+                    <h3>How is your sleep lately?</h3>
+                    <div class="options">
+                        <button class="option-btn" onclick="selectOption(2, 'sleep')">Having trouble sleeping</button>
+                        <button class="option-btn" onclick="selectOption(2, 'anxiety')">Racing thoughts at night</button>
+                        <button class="option-btn" onclick="selectOption(2, 'mood')">Sleeping too much</button>
+                        <button class="option-btn" onclick="selectOption(2, 'general')">Sleep is normal</button>
+                    </div>
+                </div>
+
+                <div class="question" data-question="3" style="display: none;">
+                    <h3>How would you describe your energy levels?</h3>
+                    <div class="options">
+                        <button class="option-btn" onclick="selectOption(3, 'mood')">Low energy/fatigue</button>
+                        <button class="option-btn" onclick="selectOption(3, 'anxiety')">Restless/can't relax</button>
+                        <button class="option-btn" onclick="selectOption(3, 'stress')">Exhausted from stress</button>
+                        <button class="option-btn" onclick="selectOption(3, 'general')">Normal but could be better</button>
+                    </div>
+                </div>
+
+                <div class="question" data-question="4" style="display: none;">
+                    <h3>How are your daily activities affected?</h3>
+                    <div class="options">
+                        <button class="option-btn" onclick="selectOption(4, 'mood')">Lost interest in activities</button>
+                        <button class="option-btn" onclick="selectOption(4, 'anxiety')">Avoiding certain situations</button>
+                        <button class="option-btn" onclick="selectOption(4, 'stress')">Too busy/overwhelmed</button>
+                        <button class="option-btn" onclick="selectOption(4, 'general')">Managing but want to improve</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="results" class="result-section">
+                <h2>Based on your responses, we recommend:</h2>
+                <div id="recommendations"></div>
+                <button class="submit-btn" onclick="goToTopics()">Explore Topics</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Display selected mood
+        window.onload = function() {
+            const selectedMood = localStorage.getItem("selectedMood");
+            if (selectedMood) {
+                document.getElementById('selectedMood').textContent = `Your current mood: ${selectedMood}`;
+            }
+            updateProgress();
+        };
+
+        let currentQuestion = 1;
+        const totalQuestions = 4;
+        let responses = {
+            mood: 0,
+            anxiety: 0,
+            stress: 0,
+            general: 0,
+            sleep: 0
+        };
+
+        function updateProgress() {
+            const progress = (currentQuestion - 1) / totalQuestions * 100;
+            document.getElementById('progressBar').style.width = `${progress}%`;
+        }
+
+        function selectOption(questionNum, category) {
+            // Update responses
+            responses[category]++;
+
+            // Clear previous selection in current question
+            const currentButtons = document.querySelector(`[data-question="${questionNum}"]`)
+                .getElementsByClassName('option-btn');
+            Array.from(currentButtons).forEach(btn => btn.classList.remove('selected'));
+
+            // Add selected class to clicked button
+            event.target.classList.add('selected');
+
+            // Move to next question or show results
+            setTimeout(() => {
+                if (questionNum < totalQuestions) {
+                    document.querySelector(`[data-question="${questionNum}"]`).style.display = 'none';
+                    document.querySelector(`[data-question="${questionNum + 1}"]`).style.display = 'block';
+                    currentQuestion++;
+                    updateProgress();
+                } else {
+                    showResults();
+                }
+            }, 500);
+        }
+
+        function showResults() {
+            document.getElementById('progressBar').style.width = '100%';
+            document.getElementById('questionnaire').style.display = 'none';
+            
+            const results = document.getElementById('results');
+            const recommendations = document.getElementById('recommendations');
+            results.style.display = 'block';
+            
+            // Clear previous recommendations
+            recommendations.innerHTML = '';
+
+            // Analyze responses and create recommendations
+            const categories = Object.entries(responses)
+                .sort((a, b) => b[1] - a[1])
+                .filter(category => category[1] > 0);
+
+            // Store results in localStorage
+            localStorage.setItem('assessmentResults', JSON.stringify(categories));
+
+            const recommendationMap = {
+                mood: {
+                    title: "Mood Support",
+                    description: "Explore our mood tracking and journaling tools, along with meditation exercises.",
+                    link: "mood.html"
+                },
+                anxiety: {
+                    title: "Anxiety Management",
+                    description: "Try our breathing exercises and mindfulness practices.",
+                    link: "mindfulness.html"
+                },
+                stress: {
+                    title: "Stress Relief",
+                    description: "Check out our relaxation techniques and stress management resources.",
+                    link: "resources.html"
+                },
+                sleep: {
+                    title: "Sleep Improvement",
+                    description: "Discover our sleep meditation and relaxation exercises.",
+                    link: "mindfulness.html"
+                },
+                general: {
+                    title: "General Wellbeing",
+                    description: "Explore our complete collection of mental wellness resources.",
+                    link: "resources.html"
+                }
+            };
+
+            // Add recommendations based on top responses
+            categories.forEach(([category, score]) => {
+                const rec = recommendationMap[category];
+                if (rec) {
+                    const div = document.createElement('div');
+                    div.className = 'topic-suggestion';
+                    div.onclick = () => window.location.href = rec.link;
+                    div.innerHTML = `
+                        <h3>${rec.title}</h3>
+                        <p>${rec.description}</p>
+                    `;
+                    recommendations.appendChild(div);
+                }
+            });
+        }
+
+        function goToTopics() {
+            window.location.href = 'topics.html';
+        }
+
+        // Initialize progress bar
+        updateProgress();
+    </script>
+</body>
+</html> 

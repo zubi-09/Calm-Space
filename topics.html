@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CalmSpace - Popular Topics</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #ef94f4, #8c9efa, #d187cb);
+      color: #4b0082;
+      min-height: 100vh;
+    }
+
+    nav {
+      background: white;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      padding: 0 30px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    nav .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #4b0082;
+      user-select: none;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2.8rem;
+      margin: 40px 20px 0;
+      background: linear-gradient(45deg, #a4508b,#4b0082);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 700;
+    }
+
+    .topics-grid {
+      max-width: 900px;
+      margin: 40px auto 80px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 30px;
+      padding: 0 20px;
+    }
+
+    .topic-card {
+      background: rgba(255, 255, 255, 0.6);
+      border-radius: 20px;
+      padding: 30px 20px;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #4b0082;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      user-select: none;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .topic-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+      background: rgba(255, 255, 255, 0.85);
+      color: #a4508b;
+    }
+
+    .topic-card.highlighted {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7));
+      box-shadow: 0 8px 30px rgba(147, 51, 234, 0.3);
+      border: 2px solid #9333ea;
+    }
+
+    .topic-card.highlighted::before {
+      content: "Recommended";
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      background: #9333ea;
+      color: white;
+      font-size: 0.7rem;
+      padding: 3px 8px;
+      border-radius: 10px;
+      font-weight: normal;
+    }
+
+    .assessment-note {
+      text-align: center;
+      margin: 20px auto;
+      max-width: 600px;
+      padding: 15px;
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 15px;
+      font-size: 1.1rem;
+      color: #4b0082;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+    <nav>
+      <div class="logo">CalmSpace</div>
+    </nav>
+  
+    <h1>🧠 Mental Health</h1>
+
+    <div id="assessmentNote" class="assessment-note">
+      Based on your assessment, we've highlighted topics that may be most relevant for you.
+    </div>
+  
+    <div class="topics-grid">
+      <div class="topic-card" data-topic="anxiety" onclick="goToTopic('anxiety')">🧠 Anxiety</div>
+      <div class="topic-card" data-topic="depression,mood" onclick="goToTopic('depression')">🌧️ Depression</div>
+      <div class="topic-card" data-topic="stress" onclick="goToTopic('stress')">🔥 Stress</div>
+      <div class="topic-card" data-topic="sleep" onclick="goToTopic('sleep')">😴 Sleep Issues</div>
+      <div class="topic-card" data-topic="addiction" onclick="goToTopic('addiction')">🍷 Addiction</div>
+      <div class="topic-card" data-topic="bipolar" onclick="goToTopic('bipolar disorder')">⚡ Bipolar Disorder</div>
+      <div class="topic-card" data-topic="personality" onclick="goToTopic('personality disorder')">🧑🏻 Personality Disorders</div>
+      <div class="topic-card" data-topic="grief" onclick="goToTopic('Grief&loss')">🖤 Grief & Loss</div>
+      <div class="topic-card" data-topic="trauma" onclick="goToTopic('PTSD&Trauma')">💥 PTSD & Trauma</div>
+      <div class="topic-card" data-topic="crisis" onclick="goToTopic('suicide&selfharm')">⚠️ Suicide & Self-Harm</div>
+    </div>
+  
+    <script>
+      // Check for assessment results when page loads
+      window.onload = function() {
+        const assessmentResults = JSON.parse(localStorage.getItem('assessmentResults') || '[]');
+        
+        if (assessmentResults.length > 0) {
+          document.getElementById('assessmentNote').style.display = 'block';
+          
+          // Map assessment categories to topics
+          const topicMapping = {
+            anxiety: ['anxiety'],
+            mood: ['depression', 'bipolar'],
+            stress: ['stress'],
+            sleep: ['sleep'],
+            general: [] // General doesn't highlight specific topics
+          };
+
+          // Get all relevant topics based on assessment
+          const relevantTopics = assessmentResults
+            .map(([category]) => topicMapping[category] || [])
+            .flat();
+
+          // Highlight relevant topic cards
+          document.querySelectorAll('.topic-card').forEach(card => {
+            const cardTopics = card.getAttribute('data-topic').split(',');
+            if (cardTopics.some(topic => relevantTopics.includes(topic))) {
+              card.classList.add('highlighted');
+            }
+          });
+        }
+      };
+
+      function goToTopic(topic) {
+        window.location.href = topic + '.html';
+      }
+    </script>
+
+    <div style="text-align: center; margin: 60px 0 30px;">
+      <a href="journal.html" style="
+        background: linear-gradient(135deg, #c084fc, #a78bfa);
+        color: white;
+        padding: 14px 36px;
+        border: none;
+        border-radius: 30px;
+        text-decoration: none;
+        font-size: 1.2rem;
+        font-weight: bold;
+        box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+        transition: all 0.25s ease-in-out;
+        display: inline-block;
+      " onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+        Proceed to Journal →
+      </a>
+    </div>
+</body>
+</html>
+  

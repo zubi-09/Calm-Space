@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Your Journal</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #ef94f4, #8c9efa, #d187cb);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .journal-container {
+      background-color: white;
+      border-radius: 20px;
+      padding: 30px 40px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      width: 90%;
+      max-width: 600px;
+      text-align: center;
+    }
+
+    h1 {
+      color: #6a0dad;
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    .mood-display {
+      font-size: 2rem;
+      margin-bottom: 15px;
+    }
+
+    .prompt {
+      font-size: 1rem;
+      color: #444;
+      margin-bottom: 10px;
+    }
+
+    textarea {
+      display: block;
+      margin: 0 auto;
+      width: 100%;
+      height: 180px;
+      padding: 15px;
+      font-size: 1rem;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      resize: none;
+      outline: none;
+      box-sizing: border-box;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px 25px;
+      font-size: 1rem;
+      background: linear-gradient(to right, #b86adf, #d57af5);
+      border: none;
+      color: white;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: linear-gradient(to right, #9b5bc7, #b467e0);
+    }
+    .tarot-toggle {
+  position: fixed;
+  bottom: 90px;
+  right: 20px;
+  font-size: 3.5rem;
+  cursor: pointer;
+  z-index: 999;
+  background: transparent;
+  padding: 0;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 60%;
+  border: 3px solid #7b429f; /* Darker violet */
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+  .tarot-widget {
+    display: none;
+    position: fixed;
+    bottom: 150px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 3px solid;
+    border-image: linear-gradient(45deg, #b86adf, #d57af5) 1;
+    border-radius: 20px;
+    padding: 25px;
+    width: 300px;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.25);
+    text-align: center;
+    z-index: 998;
+    backdrop-filter: blur(10px);
+    color: #fff;
+    font-family: 'Segoe UI', sans-serif;
+  }
+
+  .tarot-widget h3 {
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+    color: #fff;
+  }
+
+  .zodiac-select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 12px;
+    border-radius: 12px;
+    border: none;
+    font-family: inherit;
+    font-size: 1rem;
+  }
+
+  .tarot-card {
+    font-size: 1rem;
+    font-weight: 500;
+    margin-top: 15px;
+    background: rgba(255, 255, 255, 0.15);
+    padding: 15px;
+    border-radius: 15px;
+  }
+  @keyframes pulseGlow {
+  0% {
+    box-shadow: 0 0 10px #6e279b, 0 0 20px #6c209b;
+  }
+  50% {
+    box-shadow: 0 0 20px #a425ba, 0 0 30px #ad41c0;
+  }
+  100% {
+    box-shadow: 0 0 10px #6b2497, 0 0 20px #7228a1;
+  }
+}
+
+.tarot-toggle {
+  animation: pulseGlow 2.5s infinite ease-in-out;
+}
+
+</style>
+  </style>
+</head>
+<body>
+  <div class="journal-container">
+    <h1>Your Journal for Today</h1>
+    <div class="mood-display" id="moodDisplay">Mood: 😊</div>
+    <div class="prompt">Write down anything on your mind. This space is all yours 💭</div>
+    <textarea id="journalEntry" placeholder="Start typing here..."></textarea>
+    <br />
+    <button onclick="saveJournal()">Save Entry</button>
+  </div>
+
+  <script>
+    const mood = localStorage.getItem("selectedMood") || "😊";
+    document.getElementById("moodDisplay").innerText = `Mood: ${mood}`;
+
+    function saveJournal() {
+      const entry = document.getElementById("journalEntry").value.trim();
+      if (entry) {
+        localStorage.setItem("journalEntry", entry);
+        window.location.href = "mindfulness.html"; // or next page you want
+      } else {
+        alert("Please write something before saving.");
+      }
+    }
+  </script>
+  </style>
+
+  <div class="tarot-toggle" id="tarotToggle">🔮</div>
+  
+  <div class="tarot-widget" id="tarotWidget">
+    <h3>Zodiac Vibe</h3>
+    <select id="zodiacSelect" class="zodiac-select">
+      <option value="">Select your sign</option>
+      <option value="Aries">Aries</option>
+      <option value="Taurus">Taurus</option>
+      <option value="Gemini">Gemini</option>
+      <option value="Cancer">Cancer</option>
+      <option value="Leo">Leo</option>
+      <option value="Virgo">Virgo</option>
+      <option value="Libra">Libra</option>
+      <option value="Scorpio">Scorpio</option>
+      <option value="Sagittarius">Sagittarius</option>
+      <option value="Capricorn">Capricorn</option>
+      <option value="Aquarius">Aquarius</option>
+      <option value="Pisces">Pisces</option>
+    </select>
+    <div class="tarot-card" id="tarotCard">Choose your sign to reveal your vibe ✨</div>
+  </div>
+  
+  <script>
+    const tarotToggle = document.getElementById('tarotToggle');
+    const tarotWidget = document.getElementById('tarotWidget');
+    const tarotCard = document.getElementById('tarotCard');
+    const zodiacSelect = document.getElementById('zodiacSelect');
+  
+    const zodiacMessages = {
+      Aries: "Take that leap you've been thinking about — your fire is your guide. 🔥",
+      Taurus: "Stability is your strength. But today, try something new. 🌱",
+      Gemini: "You are allowed to feel more than one thing at once. 💬",
+      Cancer: "Your sensitivity is your superpower. Nurture yourself today. 🦀",
+      Leo: "Shine without shrinking. The world needs your light. 🦁",
+      Virgo: "Pause. Breathe. Perfection isn’t peace. 🌾",
+      Libra: "Seek harmony, not balance. They’re not the same. ⚖️",
+      Scorpio: "You feel deeply. That’s your magic. 🦂",
+      Sagittarius: "Adventure doesn't always mean movement. Explore inward. 🏹",
+      Capricorn: "You’ve climbed high. Take a moment to see the view. 🏔️",
+      Aquarius: "Your ideas are galaxies. Don't dim them. 🌌",
+      Pisces: "Dream boldly. Let your intuition lead the way. 🐟"
+    };
+  
+    tarotToggle.addEventListener('click', () => {
+      tarotWidget.style.display = tarotWidget.style.display === 'none' || tarotWidget.style.display === '' ? 'block' : 'none';
+    });
+  
+    zodiacSelect.addEventListener('change', () => {
+      const sign = zodiacSelect.value;
+      tarotCard.innerText = sign ? zodiacMessages[sign] : 'Choose your sign to reveal your vibe ✨';
+    });
+  </script>
+</body>
+</html>
